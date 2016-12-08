@@ -1,6 +1,7 @@
 一、将这些日志存储在HDFS上，HDFS会保存三个副本，强一致性、安全可靠
 
 二、统计实现
+
   1、统计每日、周、月的UV数量
     （1）程序运行时传入参数（which day、which week、which month），输入为日志存放目录，输出为按需统计出的UV数量
     （2）map的输出以ip做key，1为value。reduce输出key为日或周或月，value为UV数量
