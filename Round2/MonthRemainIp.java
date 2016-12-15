@@ -23,16 +23,16 @@ import LastProject.uvtest.Reduce;
 
 public class MonthRemainIp {
 	public static class Map extends Mapper<LongWritable, Text, Text, Text>{
-		private String day1=null;
-		private String day2=null;
+		private String month1=null;
+		private String month2=null;
 		@Override
 		protected void setup(
 				Context context)
 				throws IOException, InterruptedException {
 			Configuration conf = context.getConfiguration();
-			String str[] = conf.getStrings("day");
-			day1 = str[2];
-			day2 = str[3];
+			String str[] = conf.getStrings("month");
+			month1 = str[2];
+			month2 = str[3];
 		}
 		@Override
 		protected void map(LongWritable key, Text value,
@@ -41,10 +41,10 @@ public class MonthRemainIp {
 			FileSplit filesplit = (FileSplit) context.getInputSplit();
 			String path[]=filesplit.getPath().toString().split("/");
 			String filename=path[path.length-3];
-			if(filename.equals(day1)){
+			if(filename.equals(month1)){
 				String ip = value.toString().split(" ")[0];
 				context.write(new Text(ip), new Text("a"));
-			}else{
+			}else if(filename.equals(month2)){
 				String ip = value.toString().split(" ")[0];
 				context.write(new Text(ip), new Text("b"));
 			}
@@ -78,7 +78,7 @@ public class MonthRemainIp {
 	}
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		conf.setStrings("day", args);		
+		conf.setStrings("month", args);		
 		Job job = new Job(conf);
 		job.setJobName("MonthRemainIp");
 		job.setJarByClass(MonthRemainIp.class);
