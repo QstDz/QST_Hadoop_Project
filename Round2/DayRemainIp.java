@@ -44,7 +44,7 @@ public class DayRemainIp {
 			if(filename.equals(day1)){
 				String ip = value.toString().split(" ")[0];
 				context.write(new Text(ip), new Text("a"));
-			}else{
+			}else if(filename.equals(day2)){
 				String ip = value.toString().split(" ")[0];
 				context.write(new Text(ip), new Text("b"));
 			}
