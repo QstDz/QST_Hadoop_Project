@@ -79,3 +79,5 @@
 三、项目拆解
 
     预计周日之前完成统计需求的代码编写与调试，周三之前完成实时查询需求
+
+showtest和showsumilition为spark-streaming实现的实时查询
